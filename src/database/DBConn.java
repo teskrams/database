@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
 
-public class DBConn {
+public abstract class DBConn {
 
     protected Connection conn;
 
-    public DBConn() {
-    }
+    //public DBConn() {
+    //}
 
     public void connect() {
         try {
@@ -26,9 +26,8 @@ public class DBConn {
         }
     }
     public static void main(String[] args) {
-        DBConn test = new DBConn();
-        test.connect();
-
+        //DBConn test = new DBConn();
+        //test.connect();
     }
 }
 
