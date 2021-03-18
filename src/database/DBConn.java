@@ -17,7 +17,7 @@ public abstract class DBConn {
             Properties p = new Properties();
             p.put("user", "root");
             p.put("password", "root");
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/roddi?"
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/piazza?"
             +"allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false", p);
         }
         catch (Exception e) {

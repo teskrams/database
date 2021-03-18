@@ -9,4 +9,9 @@ public class User {
         this.username = username;
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "Email:"+username+" password:"+password;
+    }
 }
