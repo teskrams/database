@@ -14,4 +14,8 @@ public class User {
     public String toString() {
         return "Email:"+username+" password:"+password;
     }
+
+    public String getName() {
+        return username;
+    }
 }
