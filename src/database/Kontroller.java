@@ -216,7 +216,7 @@ public class Kontroller extends DBConn{
         try {
             PreparedStatement stats = conn.prepareStatement("select siteUser.email, count(hasread.email)"+
                                                             "from (siteUser left outer join hasread on siteUser.email = hasread.Email)"+
-                                                            "group by hasread.emailorder by count(hasread.email) desc;");
+                                                            "group by hasread.email order by count(hasread.email) desc;");
             ResultSet read = stats.executeQuery();
             Collection<List<String>> readlist = new ArrayList<>();
             while (read.next()) {
@@ -232,13 +232,17 @@ public class Kontroller extends DBConn{
             List<List<String>> writelist = new ArrayList<>();
             while (write.next()) {
                 List<String> løkke = new ArrayList<>();
-                løkke.add(read.getString("email"));
-                løkke.add(read.getString("count(hasread.email)"));
+                løkke.add(write.getString("email"));
+                løkke.add(write.getString("count(post.authoremail)"));
                 writelist.add(løkke);
             }
             result.addAll(readlist);
             for (List<String> list : writelist) {
-                result.stream().forEach(e -> e.get(0).equals(list.get(0)));
+                for (List<String> list2 : result){
+                    if (list.get(0).equals(list2.get(0))) {
+                        list2.add(list.get(1));
+                    }
+                }
             }
         }
         catch (Exception e) {
@@ -246,6 +250,7 @@ public class Kontroller extends DBConn{
             System.out.println("feil i databaseconnection");
             return result;
         }
+        System.out.println("litt statistikk([bruker, antall lest, antall skrevet]):" + result);
         return result;
     }
     
@@ -255,9 +260,10 @@ public class Kontroller extends DBConn{
         test.connect();
         test.login("jens@jens.no", "admin");
         //test.newPost(user, "test1", "test teste teste", new Folder("test"), "Question");
-        System.out.println(user);
-        test.searchHeading("tt");
-        test.searchText("teste");
+        //System.out.println(user);
+        //test.searchHeading("tt");
+        //test.searchText("teste");
+        test.stats();
         //test.replyReply(user, "testtest", "kultest", 1);
         //System.out.println(test.findPostID());
     }
