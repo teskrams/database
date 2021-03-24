@@ -8,9 +8,6 @@ public abstract class DBConn {
 
     protected Connection conn;
 
-    //public DBConn() {
-    //}
-
     public void connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -24,10 +21,6 @@ public abstract class DBConn {
                 throw new RuntimeException("Unable to connect", e);
             
         }
-    }
-    public static void main(String[] args) {
-        //DBConn test = new DBConn();
-        //test.connect();
     }
 }
 
